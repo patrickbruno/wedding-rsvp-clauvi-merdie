@@ -45,13 +45,13 @@ export default function Hero() {
             {t.hero.kicker}
           </motion.p>
           <h1 className="hero__names">
-            <motion.span className="hero__name" variants={item}>
+            <motion.span className="hero__name hero__name--a" variants={item}>
               {partnerA}
             </motion.span>
             <motion.span className="hero__amp" variants={item}>
               {t.hero.and}
             </motion.span>
-            <motion.span className="hero__name" variants={item}>
+            <motion.span className="hero__name hero__name--b" variants={item}>
               {partnerB}
             </motion.span>
           </h1>
