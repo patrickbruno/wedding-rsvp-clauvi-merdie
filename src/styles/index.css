@@ -145,8 +145,8 @@ a { color: inherit; }
   text-shadow: 0 2px 50px rgba(0, 0, 0, 0.55);
 }
 /* Splay the names so each sits above its person — Clauvi (right), Merdie (left) */
-.hero__name--a { align-self: flex-end; margin-right: clamp(0px, 2.5vw, 36px); }
-.hero__name--b { align-self: flex-start; margin-left: clamp(0px, 2.5vw, 36px); }
+.hero__name--a { position: relative; left: clamp(20px, 10vw, 150px); }
+.hero__name--b { position: relative; left: clamp(-150px, -10vw, -20px); }
 .hero__amp {
   font-style: italic;
   font-size: 0.42em;
@@ -154,53 +154,28 @@ a { color: inherit; }
   font-weight: 400;
   margin: 0.04em 0;
 }
-.hero__rule {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 clamp(16px, 3vw, 22px);
-}
-.hero__rule-line {
-  display: block;
-  width: clamp(46px, 10vw, 84px);
-  height: 1px;
-  background: rgba(255, 255, 255, 0.55);
-}
-.hero__rule-dot {
-  width: 6px; height: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  transform: rotate(45deg);
-}
 .hero__date {
   font-family: var(--serif);
-  font-size: clamp(20px, 5vw, 30px);
+  font-size: clamp(24px, 6vw, 40px);
   letter-spacing: 0.04em;
   color: #fff;
 }
 .hero__place {
-  margin-top: 6px;
-  font-size: clamp(12px, 3.4vw, 15px);
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.72);
+  margin-top: 8px;
+  font-size: clamp(13px, 3.6vw, 17px);
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
 }
 
-/* Hero call-to-action */
-.hero__actions {
-  margin-top: clamp(24px, 4vw, 34px);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(16px, 3vw, 26px);
-}
+/* Primary call-to-action */
 .hero__cta {
+  margin-top: clamp(24px, 4vw, 34px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -209,7 +184,7 @@ a { color: inherit; }
   background: var(--cream);
   border: 1px solid var(--cream);
   border-radius: 999px;
-  padding: 15px 36px;
+  padding: 17px 46px;
   transition: transform 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
   box-shadow: 0 18px 50px -22px rgba(0, 0, 0, 0.7);
 }
@@ -218,17 +193,29 @@ a { color: inherit; }
   background: #fff;
   border-color: #fff;
 }
-.hero__more {
-  font-size: 11px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.78);
-  padding-bottom: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+
+/* Animated scroll-down arrow (replaces the "learn more" link) */
+.hero__scroll {
+  margin-top: clamp(22px, 4vw, 34px);
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 42px;
+  height: 30px;
+  color: rgba(255, 255, 255, 0.82);
 }
-.hero__more:hover { color: #fff; border-color: #fff; }
+.hero__chevron {
+  width: 15px;
+  height: 15px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: chevronBounce 1.9s ease-in-out infinite;
+}
+@keyframes chevronBounce {
+  0%, 100% { transform: rotate(45deg) translate(-3px, -3px); opacity: 0.5; }
+  50% { transform: rotate(45deg) translate(3px, 3px); opacity: 1; }
+}
 
 /* ---- Countdown --------------------------------------------- */
 .countdown {

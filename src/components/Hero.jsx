@@ -58,24 +58,23 @@ export default function Hero() {
         </motion.div>
 
         <motion.div className="hero__foot" variants={footGroup} initial="hidden" animate="show">
-          <motion.div className="hero__rule" variants={item}>
-            <span className="hero__rule-line" />
-            <span className="hero__rule-dot" />
-          </motion.div>
           <motion.p className="hero__date" variants={item}>
             {pick(config.date.weekday)}, {config.date.display}
           </motion.p>
           <motion.p className="hero__place" variants={item}>
-            {pick(config.venue.name)} · {config.venue.address}
+            {pick(config.venue.name)}
           </motion.p>
-          <motion.div className="hero__actions" variants={item}>
-            <a className="hero__cta" href="#rsvp">
-              {t.hero.rsvpCta}
-            </a>
-            <a className="hero__more" href="#details">
-              {t.hero.scroll}
-            </a>
-          </motion.div>
+          <motion.a className="hero__cta" href="#rsvp" variants={item}>
+            {t.hero.rsvpCta}
+          </motion.a>
+          <motion.a
+            className="hero__scroll"
+            href="#details"
+            variants={item}
+            aria-label={t.hero.scroll}
+          >
+            <span className="hero__chevron" aria-hidden="true" />
+          </motion.a>
         </motion.div>
       </div>
     </header>
