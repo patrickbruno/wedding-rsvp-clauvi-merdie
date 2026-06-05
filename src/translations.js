@@ -33,6 +33,10 @@ export const translations = {
       addCalendar: 'Zum Kalender hinzufügen',
     },
 
+    gallery: {
+      title: 'Die Location',
+    },
+
     schedule: {
       title: 'Ablauf',
       tentativeNote: 'Der Ablauf steht noch nicht endgültig fest und kann sich noch ändern.',
@@ -97,6 +101,10 @@ export const translations = {
       whereLabel: 'Where',
       openMaps: 'Open in Maps',
       addCalendar: 'Add to calendar',
+    },
+
+    gallery: {
+      title: 'The Venue',
     },
 
     schedule: {

@@ -35,6 +35,17 @@ export const config = {
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2667.3907690448377!2d11.9613391!3d48.0447923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479dfef2832a639f%3A0x2980e2d2708fe2b4!2sStadthalle%20Grafing!5e0!3m2!1sde!2sde!4v1780618123645!5m2!1sde!2sde',
   },
 
+  // Gallery -----------------------------------------------------
+  // Photos of the venue shown in a carousel. Drop the image files in
+  // `public/images/` and list them here. Any image that can't be loaded
+  // is skipped, and the whole section hides if none are available yet.
+  // `src` is relative to the site root (i.e. the `public/` folder).
+  gallery: [
+    { src: 'images/stadthalle-1.jpg', alt: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' } },
+    { src: 'images/stadthalle-2.jpg', alt: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' } },
+    { src: 'images/stadthalle-3.jpg', alt: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' } },
+  ],
+
   // Schedule ----------------------------------------------------
   // The day's timeline. Set `tentative: true` while it's not final
   // and a gentle "subject to change" note will be shown.
