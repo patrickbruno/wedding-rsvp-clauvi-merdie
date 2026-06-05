@@ -3,6 +3,7 @@ import LanguageToggle from './components/LanguageToggle.jsx'
 import Hero from './components/Hero.jsx'
 import Countdown from './components/Countdown.jsx'
 import Details from './components/Details.jsx'
+import Gallery from './components/Gallery.jsx'
 import Schedule from './components/Schedule.jsx'
 import Rsvp from './components/Rsvp.jsx'
 import Footer from './components/Footer.jsx'
@@ -17,6 +18,7 @@ export default function App() {
         <Countdown />
         <Divider />
         <Details />
+        <Gallery />
         <Schedule />
         <Divider />
         <Rsvp />
