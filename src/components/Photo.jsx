@@ -6,13 +6,14 @@
  */
 export default function Photo({
   name,
+  dir = 'photos',
   alt = '',
   className,
   loading = 'lazy',
   sizes,
   draggable = false,
 }) {
-  const base = `photos/${name}`
+  const base = `${dir}/${name}`
   return (
     <picture className={className}>
       <source srcSet={`${base}.avif`} type="image/avif" sizes={sizes} />

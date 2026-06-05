@@ -1,10 +1,12 @@
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useLanguage } from '../lib/i18n.jsx'
 import Reveal from './Reveal.jsx'
 import Photo from './Photo.jsx'
 
-// Order is chosen for rhythm: colour and black-&-white alternate so the
-// masonry reads as a curated set rather than a dump of files.
+const AUTOPLAY_MS = 4500
+
+// Colour and black-&-white alternate so the run reads as a curated set.
 const photos = [
   { name: 'magnolia', caption: { de: 'Magnolienblüte', en: 'Magnolia blossom' } },
   { name: 'selfie', caption: { de: 'Wir zwei', en: 'The two of us' } },
@@ -16,6 +18,28 @@ const photos = [
 
 export default function Moments() {
   const { t, pick } = useLanguage()
+  const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const touchStartX = useRef(null)
+  const count = photos.length
+
+  useEffect(() => {
+    if (paused) return
+    const id = setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS)
+    return () => clearInterval(id)
+  }, [paused, count])
+
+  const go = (n) => setIndex((n + count) % count)
+
+  const onTouchStart = (e) => (touchStartX.current = e.touches[0].clientX)
+  const onTouchEnd = (e) => {
+    if (touchStartX.current == null) return
+    const delta = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(delta) > 40) go(index + (delta < 0 ? 1 : -1))
+    touchStartX.current = null
+  }
+
+  const current = photos[index]
 
   return (
     <section className="section moments" id="moments">
@@ -26,21 +50,45 @@ export default function Moments() {
         {t.moments.subtitle}
       </Reveal>
 
-      <div className="moments__grid">
-        {photos.map((p, i) => (
-          <motion.figure
-            className="moments__item"
-            key={p.name}
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Photo name={p.name} alt={pick(p.caption)} />
-            <figcaption className="moments__caption">{pick(p.caption)}</figcaption>
-          </motion.figure>
-        ))}
-      </div>
+      <Reveal
+        className="moments__carousel"
+        delay={0.1}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div
+          className="moments__stage"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          <AnimatePresence initial={false} mode="popLayout">
+            <motion.figure
+              key={current.name}
+              className="moments__slide"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Photo name={current.name} alt={pick(current.caption)} loading="eager" />
+              <figcaption className="moments__caption">{pick(current.caption)}</figcaption>
+            </motion.figure>
+          </AnimatePresence>
+        </div>
+
+        <div className="moments__dots" role="tablist" aria-label="Gallery">
+          {photos.map((p, i) => (
+            <button
+              key={p.name}
+              className={`moments__dot ${i === index ? 'is-active' : ''}`}
+              onClick={() => go(i)}
+              aria-label={pick(p.caption)}
+              aria-selected={i === index}
+              role="tab"
+            />
+          ))}
+        </div>
+      </Reveal>
     </section>
   )
 }

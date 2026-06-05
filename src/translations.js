@@ -13,6 +13,7 @@ export const translations = {
       kicker: 'Wir heiraten',
       and: '&',
       save: 'Save the Date',
+      rsvpCta: 'Jetzt zusagen',
       scroll: 'Mehr erfahren',
     },
 
@@ -88,6 +89,7 @@ export const translations = {
       kicker: "We're getting married",
       and: '&',
       save: 'Save the Date',
+      rsvpCta: 'RSVP',
       scroll: 'Learn more',
     },
 

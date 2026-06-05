@@ -2,6 +2,7 @@ import { useLanguage } from '../lib/i18n.jsx'
 import { config } from '../config.js'
 import { mapsUrl, googleCalendarUrl } from '../lib/datetime.js'
 import Reveal from './Reveal.jsx'
+import Photo from './Photo.jsx'
 
 export default function Details() {
   const { t, pick } = useLanguage()
@@ -12,11 +13,25 @@ export default function Details() {
     location: config.venue.mapsQuery,
   })
 
+  // Optional venue photo (public/images/<name>.avif|webp). Set to null to hide.
+  const venuePhoto = config.venue.photo
+
   return (
     <section className="section details" id="details">
       <Reveal as="h2" className="section__title">
         {t.details.title}
       </Reveal>
+
+      {venuePhoto && (
+        <Reveal className="venue-photo" delay={0.05}>
+          <Photo
+            dir="images"
+            name={venuePhoto}
+            alt={pick(config.venue.name)}
+            sizes="(max-width: 980px) 100vw, 980px"
+          />
+        </Reveal>
+      )}
 
       <div className="details__grid">
         <Reveal className="detail-card" delay={0.05}>
@@ -37,18 +52,6 @@ export default function Details() {
           </a>
         </Reveal>
       </div>
-
-      {config.venue.embedUrl && (
-        <Reveal className="details__map" delay={0.2}>
-          <iframe
-            title={pick(config.venue.name)}
-            src={config.venue.embedUrl}
-            loading="lazy"
-            allowFullScreen
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </Reveal>
-      )}
     </section>
   )
 }

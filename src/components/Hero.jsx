@@ -3,13 +3,22 @@ import { useLanguage } from '../lib/i18n.jsx'
 import { config } from '../config.js'
 import Photo from './Photo.jsx'
 
-const container = {
+const headGroup = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.16, delayChildren: 0.5 } },
+  show: { transition: { staggerChildren: 0.14, delayChildren: 0.45 } },
 }
-const rise = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
+const footGroup = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 1.05 } },
+}
+const item = {
+  hidden: { opacity: 0, y: 22, filter: 'blur(6px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
+  },
 }
 
 export default function Hero() {
@@ -18,53 +27,57 @@ export default function Hero() {
 
   return (
     <header className="hero" id="top">
-      {/* Full-bleed B&W portrait — shot on black, so it melts into the hero */}
+      {/* Full-bleed B&W portrait, shot on black so it fuses with the hero */}
       <motion.div
         className="hero__media"
-        initial={{ opacity: 0, scale: 1.08 }}
+        initial={{ opacity: 0, scale: 1.06 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
         aria-hidden="true"
       >
         <Photo name="portrait" alt={`${partnerA} ${t.hero.and} ${partnerB}`} loading="eager" />
       </motion.div>
       <div className="hero__veil" aria-hidden="true" />
 
-      <motion.div className="hero__inner" variants={container} initial="hidden" animate="show">
-        <motion.p className="hero__kicker" variants={rise}>
-          {t.hero.kicker}
-        </motion.p>
-
-        <motion.h1 className="hero__names" variants={rise}>
-          <span className="hero__name">{partnerA}</span>
-          <span className="hero__amp">{t.hero.and}</span>
-          <span className="hero__name">{partnerB}</span>
-        </motion.h1>
-
-        <motion.div className="hero__rule" variants={rise}>
-          <span className="hero__rule-line" />
-          <span className="hero__rule-dot" />
-          <span className="hero__rule-line" />
+      <div className="hero__inner">
+        <motion.div className="hero__head" variants={headGroup} initial="hidden" animate="show">
+          <motion.p className="hero__kicker" variants={item}>
+            {t.hero.kicker}
+          </motion.p>
+          <h1 className="hero__names">
+            <motion.span className="hero__name" variants={item}>
+              {partnerA}
+            </motion.span>
+            <motion.span className="hero__amp" variants={item}>
+              {t.hero.and}
+            </motion.span>
+            <motion.span className="hero__name" variants={item}>
+              {partnerB}
+            </motion.span>
+          </h1>
         </motion.div>
 
-        <motion.p className="hero__date" variants={rise}>
-          {pick(config.date.weekday)}, {config.date.display}
-        </motion.p>
-        <motion.p className="hero__place" variants={rise}>
-          {pick(config.venue.name)} · {config.venue.address}
-        </motion.p>
-      </motion.div>
-
-      <motion.a
-        href="#details"
-        className="hero__scroll"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-      >
-        <span>{t.hero.scroll}</span>
-        <span className="hero__scroll-line" aria-hidden="true" />
-      </motion.a>
+        <motion.div className="hero__foot" variants={footGroup} initial="hidden" animate="show">
+          <motion.div className="hero__rule" variants={item}>
+            <span className="hero__rule-line" />
+            <span className="hero__rule-dot" />
+          </motion.div>
+          <motion.p className="hero__date" variants={item}>
+            {pick(config.date.weekday)}, {config.date.display}
+          </motion.p>
+          <motion.p className="hero__place" variants={item}>
+            {pick(config.venue.name)} · {config.venue.address}
+          </motion.p>
+          <motion.div className="hero__actions" variants={item}>
+            <a className="hero__cta" href="#rsvp">
+              {t.hero.rsvpCta}
+            </a>
+            <a className="hero__more" href="#details">
+              {t.hero.scroll}
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
     </header>
   )
 }
