@@ -42,6 +42,11 @@ export const translations = {
       tentativeNote: 'Der Ablauf steht noch nicht endgültig fest und kann sich noch ändern.',
     },
 
+    moments: {
+      title: 'Momente',
+      subtitle: 'Ein paar unserer liebsten Augenblicke.',
+    },
+
     rsvp: {
       title: 'Zusagen',
       intro: 'Bitte sag uns bis zum {deadline} Bescheid, ob du dabei bist.',
@@ -110,6 +115,11 @@ export const translations = {
     schedule: {
       title: 'Schedule',
       tentativeNote: 'The schedule is not final yet and may still change.',
+    },
+
+    moments: {
+      title: 'Moments',
+      subtitle: 'A few of our favourite moments together.',
     },
 
     rsvp: {

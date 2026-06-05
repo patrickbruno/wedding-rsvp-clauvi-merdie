@@ -41,9 +41,7 @@ export const config = {
   // is skipped, and the whole section hides if none are available yet.
   // `src` is relative to the site root (i.e. the `public/` folder).
   gallery: [
-    { src: 'images/stadthalle-1.jpg', alt: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' } },
-    { src: 'images/stadthalle-2.jpg', alt: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' } },
-    { src: 'images/stadthalle-3.jpg', alt: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' } },
+    { src: 'images/stadthalle.webp', alt: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' } },
   ],
 
   // Schedule ----------------------------------------------------

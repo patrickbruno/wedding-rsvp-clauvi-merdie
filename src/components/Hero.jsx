@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useLanguage } from '../lib/i18n.jsx'
 import { config } from '../config.js'
+import Photo from './Photo.jsx'
 
 const container = {
   hidden: {},
@@ -9,6 +10,10 @@ const container = {
 const rise = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
+}
+const portraitIn = {
+  hidden: { opacity: 0, y: 36, scale: 0.98 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export default function Hero() {
@@ -39,6 +44,10 @@ export default function Hero() {
           <span className="hero__rule-line" />
           <span className="hero__rule-dot" />
           <span className="hero__rule-line" />
+        </motion.div>
+
+        <motion.div className="hero__portrait" variants={portraitIn}>
+          <Photo name="portrait" alt={`${partnerA} ${t.hero.and} ${partnerB}`} loading="eager" />
         </motion.div>
 
         <motion.p className="hero__date" variants={rise}>

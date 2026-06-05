@@ -72,10 +72,12 @@ a { color: inherit; }
 .hero {
   position: relative;
   min-height: 100svh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 8vh 24px;
+  padding: clamp(72px, 12vh, 120px) 24px clamp(64px, 10vh, 100px);
   overflow: hidden;
 }
 .hero__bg { position: absolute; inset: 0; z-index: 0; }
@@ -125,7 +127,7 @@ a { color: inherit; }
   font-family: var(--serif);
   font-weight: 500;
   line-height: 1;
-  font-size: clamp(56px, 16vw, 152px);
+  font-size: clamp(48px, 13vw, 120px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,6 +158,27 @@ a { color: inherit; }
   border: 1px solid var(--ink);
   transform: rotate(45deg);
 }
+
+/* B&W couple cutout — the hero centrepiece */
+.hero__portrait {
+  margin: clamp(18px, 3.5vw, 30px) auto clamp(20px, 3.5vw, 30px);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.hero__portrait picture { display: block; }
+.hero__portrait img {
+  display: block;
+  height: clamp(230px, 42svh, 500px);
+  width: auto;
+  max-width: min(88vw, 440px);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: grayscale(1) contrast(1.03);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .hero__date {
   font-family: var(--serif);
   font-size: clamp(20px, 5vw, 30px);
@@ -612,6 +635,56 @@ a { color: inherit; }
 }
 .rsvp__sent p { color: var(--ink-soft); max-width: 380px; }
 
+/* ---- Moments (couple photo masonry) ------------------------ */
+.moments__subtitle {
+  text-align: center;
+  max-width: 520px;
+  margin: -16px auto clamp(30px, 6vw, 46px);
+  font-style: italic;
+  font-family: var(--serif);
+  font-size: clamp(16px, 4vw, 20px);
+  color: var(--muted);
+}
+.moments__grid {
+  column-count: 3;
+  column-gap: clamp(12px, 2.4vw, 20px);
+}
+.moments__item {
+  position: relative;
+  margin: 0 0 clamp(12px, 2.4vw, 20px);
+  break-inside: avoid;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--cream-deep);
+  box-shadow: 0 18px 44px -34px rgba(22, 19, 16, 0.5);
+}
+.moments__item picture { display: block; }
+.moments__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.8s var(--ease);
+}
+.moments__item:hover img { transform: scale(1.045); }
+.moments__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 30px 16px 13px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(22, 19, 16, 0.62));
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.moments__item:hover .moments__caption { opacity: 1; transform: translateY(0); }
+/* Touch devices have no hover — keep the captions legible */
+@media (hover: none) {
+  .moments__caption { opacity: 1; transform: none; }
+}
+
 /* ---- Footer ------------------------------------------------- */
 .footer {
   background: var(--ink);
@@ -645,6 +718,9 @@ a { color: inherit; }
 }
 
 /* ---- Responsive -------------------------------------------- */
+@media (max-width: 880px) {
+  .moments__grid { column-count: 2; }
+}
 @media (max-width: 560px) {
   .details__grid { grid-template-columns: 1fr; }
 }
