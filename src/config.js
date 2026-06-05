@@ -25,10 +25,14 @@ export const config = {
 
   // Venue -------------------------------------------------------
   venue: {
-    name: { de: 'Jahnstraße 13', en: 'Jahnstraße 13' },
-    address: '85567 Grafing bei München',
+    name: { de: 'Stadthalle Grafing', en: 'Stadthalle Grafing' },
+    address: 'Jahnstraße 13, 85567 Grafing bei München',
     // Used for the "Open in Maps" button.
-    mapsQuery: 'Jahnstraße 13, 85567 Grafing bei München',
+    mapsQuery: 'Stadthalle Grafing, Jahnstraße 13, 85567 Grafing bei München',
+    // Embedded interactive map (Google "Share → Embed a map" src URL).
+    // Set to null to hide the map.
+    embedUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2667.3907690448377!2d11.9613391!3d48.0447923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479dfef2832a639f%3A0x2980e2d2708fe2b4!2sStadthalle%20Grafing!5e0!3m2!1sde!2sde!4v1780618123645!5m2!1sde!2sde',
   },
 
   // Schedule ----------------------------------------------------

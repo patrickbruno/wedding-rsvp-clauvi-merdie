@@ -37,6 +37,18 @@ export default function Details() {
           </a>
         </Reveal>
       </div>
+
+      {config.venue.embedUrl && (
+        <Reveal className="details__map" delay={0.2}>
+          <iframe
+            title={pick(config.venue.name)}
+            src={config.venue.embedUrl}
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </Reveal>
+      )}
     </section>
   )
 }
